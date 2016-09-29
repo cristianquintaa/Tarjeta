@@ -69,8 +69,7 @@ class Baja implements Tarjeta {
     echo "El saldo actual es de: ". $this->saldo, "<br>";
   }
   public function saldo(){
-    echo "El saldo es de: ",$this->saldo, "<br>"; 
-  }
+    return $this->saldo;
 
   public function viajesRealizados(){ 
     echo "Estos fueron los viajes realizados: <br>";
