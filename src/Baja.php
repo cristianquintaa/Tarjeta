@@ -3,8 +3,8 @@
 namespace Poli\Tarjeta;
 
 class Baja implements Tarjeta {
-  private $viajes = [];
-  private $saldo = 0;
+  public $viajes = [];
+  public $saldo = 0;
   protected $descuento;
   public $viajePlus=0;
   public function __construct() {
