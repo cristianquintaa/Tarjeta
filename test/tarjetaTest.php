@@ -3,12 +3,11 @@ namespace Poli\Tarjeta;
 
 class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
-  protected $tarjeta,$colectivo1,$colectivo2;	
+  protected $tarjeta,$colectivo1;	
 
   public function setup(){
 			$this->tarjeta = new Baja();
-			$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");
-  }	
+			$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");}	
 
   public function testCargaSaldo() {
     $this->tarjeta->recargar(272);
