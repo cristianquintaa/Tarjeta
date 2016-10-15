@@ -7,12 +7,13 @@ class Baja implements Tarjeta {
   private $saldo = 0;
   protected $descuento;
   public $viajePlus=0;
+  public $ultimafecha:;
   public function __construct() {
     $this->descuento = 1;
   }
   public function pagar(Transporte $transporte, $fecha_y_hora){
     $aux1=strtotime($fecha_y_hora);
-    $aux2=strtotime($this->viajes->tiempo());
+    $aux2=strtotime($this->ultimafecha);
     if ($transporte->tipo() == "colectivo"){
       $trasbordo = false;
       if (count($this->viajes) > 0){
@@ -29,6 +30,7 @@ class Baja implements Tarjeta {
       }
       $this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fecha_y_hora));
       $this->saldo =  $this->saldo - $monto;
+      $this->ultimafecha=$fecha_y_hora;
       if($this->saldo <0 ){
         if($this->viajePlus==2){
           echo "La tarjeta no tiene saldo. No puede viajar.<br>";
