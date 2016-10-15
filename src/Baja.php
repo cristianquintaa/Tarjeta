@@ -7,17 +7,16 @@ class Baja implements Tarjeta {
   private $saldo = 0;
   protected $descuento;
   public $viajePlus=0;
-  public $aux1,$aux2;
   public function __construct() {
     $this->descuento = 1;
   }
   public function pagar(Transporte $transporte, $fecha_y_hora){
-    $this->aux1=strtotime($fecha_y_hora);
-    $this->aux2=strtotime($this->viajes->tiempo());
+    $aux1=strtotime($fecha_y_hora);
+    $aux2=strtotime($this->viajes->tiempo());
     if ($transporte->tipo() == "colectivo"){
       $trasbordo = false;
       if (count($this->viajes) > 0){
-        if (end(($this->aux1-$this->aux2) < 3600)) {
+        if (end(($aux1-$aux2) < 3600)) {
           $trasbordo = true;
         }
       }
