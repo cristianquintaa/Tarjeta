@@ -34,9 +34,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta = new Baja();
 		$this->tarjeta->recargar(100);
 		$this->tarjeta->pagar($this->colectivo1, "2016/09/28 19:04");
-		echo "El saldo actual es de: ". $this->tarjeta->saldo(), "<br>";
 		$this->tarjeta->pagar($this->colectivo2, "2016/09/28 20:05");
-		echo "El saldo actual es de: ". $this->tarjeta->saldo(), "<br>";
 		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y pago dos colectivos sin transbordo deberia tener 84");
 	}
 }
