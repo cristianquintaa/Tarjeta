@@ -8,6 +8,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	public function setup(){
 		$this->tarjeta = new Baja();
 		$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");
+		$this->colectivo2 = new Colectivo("142 Rojo", "Rosario Bus");
 	}
 	public function testRecargar() {
 		$this->tarjeta->recargar(272);
@@ -25,10 +26,17 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->colectivo1->Nombre(), "144 Negro", "Cuando pregunto por el nombre del colectivo debería decir 144 Negro");
 		
 	}
-	public function testNombreColectivo(){
-		$this->tarjeta->recargar(272);
-  		$this->tarjeta->pagar($this->colectivo1, "2016/09/28 23:51");
-  		$this->assertEquals($this->tarjeta->viajesRealizados(), "colectivo",8,$this->colectivo1,"2016/09/28 23:51", "Viajes realizados test");
+	public function testTransbordo(){
+		$this->tarjeta->recargar(100);
+		$this->tarjeta->pagar($this->colectivo1, "2016/09/28 19:04");
+		$this->tarjeta->pagar($this->colectivo2, "2016/09/28 19:30");
+		$this->assertEquals($this->tarjeta->saldo(), 89,36, "Si cargo 100 y pago dos colectivos y uno con transbordo deberia tener 89,36");
+	}
+	public function testSinTransbordo(){
+		$this->tarjeta->recargar(100);
+		$this->tarjeta->pagar($this->colectivo1, "2016/09/28 19:04");
+		$this->tarjeta->pagar($this->colectivo2, "2016/09/28 20:05");
+		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y pago dos colectivos sin transbordo deberia tener 84");
 	}
 }
 ?>
