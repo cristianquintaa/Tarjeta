@@ -17,7 +17,7 @@ class Baja implements Tarjeta {
     if ($transporte->tipo() == "colectivo"){
       $trasbordo = false;
       if (count($this->viajes) > 0){
-        if (end(($this->aux1-$this->aux2) < 3600) {
+        if (end(($this->aux1-$this->aux2) < 3600)) {
           $trasbordo = true;
         }
       }
