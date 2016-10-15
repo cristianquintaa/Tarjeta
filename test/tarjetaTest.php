@@ -25,5 +25,10 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->colectivo1->Nombre(), "144 Negro", "Cuando pregunto por el nombre del colectivo debería decir 144 Negro");
 		
 	}
+	public function testNombreColectivo(){
+		$this->tarjeta->recargar(272);
+  		$this->tarjeta->pagar($this->colectivo1, "2016/09/28 23:51");
+  		$this->assertEquals($this->tarjeta->viajesRealizados(), "colectivo",8,$this->colectivo1,"2016/09/28 23:51", "Viajes realizados test");
+	}
 }
 ?>
