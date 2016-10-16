@@ -33,11 +33,9 @@ class Baja implements Tarjeta {
       $this->ultimafecha=$fecha_y_hora;
       if($this->saldo <0 ){
         if($this->viajePlus==2){
-          echo "La tarjeta no tiene saldo. No puede viajar.<br>";
           $this->saldo= $this->saldo + $monto;
         }
         else{
-          echo "Usted uso un viaje plus <br>";
           $this->viajePlus++;
           $this->saldo= $this->saldo + $monto;
         }
@@ -48,7 +46,6 @@ class Baja implements Tarjeta {
         $this->viajes[] = new Viaje($transporte->tipo(), 12, $transporte, strtotime($fecha_y_hora));
         $this->saldo = $this->saldo-12;
         if($this->saldo <0){
-          echo "La tarjeta no tiene saldo. No puede viajar. <br>";
           $this->saldo= $this->saldo +12;
         }
       }
@@ -70,7 +67,6 @@ class Baja implements Tarjeta {
       $this->saldo = $this->saldo-($this->viajePlus*8);
       $this->viajePlus=0;
     }
-    echo "El saldo actual es de: ". $this->saldo, "<br>";
   }
   public function saldo(){
     return $this->saldo;
