@@ -40,7 +40,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	public function testPagarBici(){
 		$this->tarjeta->recargar(100);
 		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
-		$this->assertEquals($this->tarjeta->saldo(), 308, "Si cargo 100 y pago una bici deberia tener 88");
+		$this->assertEquals($this->tarjeta->saldo(), 88, "Si cargo 100 y pago una bici deberia tener 88");
 	}
 }
 ?>
