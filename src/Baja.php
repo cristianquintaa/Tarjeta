@@ -78,8 +78,4 @@ class Baja implements Tarjeta {
   public function viajePlus(){
   	return $this->viajePlus;
   }
-  public function viajesRealizados(){ 
-    echo "Estos fueron los viajes realizados: <br>";
-    return $this->viajes; 
-  }
 }
