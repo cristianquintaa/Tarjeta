@@ -10,7 +10,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta2 = new Baja();
 		$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");
 		$this->colectivo2 = new Colectivo("142 Rojo", "Rosario Bus");
-		$this->bici = new Bici(666);
+		$this->bici = new Bicicleta(666);
 	}
 	public function testRecargar() {
 		$this->tarjeta->recargar(272);
