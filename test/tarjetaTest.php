@@ -57,12 +57,12 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	public function testPagarMedioBoleto(){
 		$this->tarjeta2->recargar(100);
 		$this->tarjeta2->pagar($this->colectivo1, "2016/09/10 19:04");
-		$this->assertEquals($this->tarjeta->saldo(), 96, "Si cargo 100 y pago un colectivo con medio deberia tener 96");
+		$this->assertEquals($this->tarjeta2->saldo(), 96, "Si cargo 100 y pago un colectivo con medio deberia tener 96");
 	}
 	public function testPagarPaseLibre(){
 		$this->tarjeta3->recargar(5);
 		$this->tarjeta3->pagar($this->colectivo2, "2016/10/09 04:19");
-		$this->assertEquals($this->tarjeta->saldo(), 5, "Si pago un colectivo con pase libre no deberia cobrarme");
+		$this->assertEquals($this->tarjeta3->saldo(), 5, "Si pago un colectivo con pase libre no deberia cobrarme");
 	}
 }
 ?>
