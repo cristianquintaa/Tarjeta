@@ -3,7 +3,7 @@ namespace Poli\Tarjeta;
 
 class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
-	protected $tarjeta,$colectivo1;	
+	protected $tarjeta,$tarjeta2, $tarjeta3,$colectivo1, $colectivo2;	
 
 	public function setup(){
 		$this->tarjeta = new Baja();
