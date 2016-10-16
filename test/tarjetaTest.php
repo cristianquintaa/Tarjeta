@@ -7,6 +7,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
 	public function setup(){
 		$this->tarjeta = new Baja();
+		$this->tarjeta2 = new Baja();
 		$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");
 		$this->colectivo2 = new Colectivo("142 Rojo", "Rosario Bus");
 	}
@@ -31,9 +32,9 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->tarjeta->saldo(), 89,36, "Si cargo 100 y pago dos colectivos y uno con transbordo deberia tener 89,36");
 	}
 	public function testSinTransbordo(){
-		$this->tarjeta->recargar(100);
-		$this->tarjeta->pagar($this->colectivo1, "2016/09/10 19:04");
-		$this->tarjeta->pagar($this->colectivo2, "2016/09/10 20:30");
+		$this->tarjeta2->recargar(100);
+		$this->tarjeta2->pagar($this->colectivo1, "2016/09/10 19:04");
+		$this->tarjeta2->pagar($this->colectivo2, "2016/09/10 20:30");
 		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y pago dos colectivos sin transbordo deberia tener 84");
 	}
 }
