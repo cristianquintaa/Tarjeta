@@ -2,7 +2,7 @@
 
 namespace Poli\Tarjeta;
 
-class Pase_Libre extends Baja {
+class paseLibre extends Baja {
 	public function __construct(){
 		$this->descuento = 0;
 	}

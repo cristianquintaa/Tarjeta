@@ -7,8 +7,8 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
 	public function setup(){
 		$this->tarjeta = new Baja();
-		$this->tarjeta2 = new Medio_Boleto();
-		$this->tarjeta3 = new Pase_Libre();
+		$this->tarjeta2 = new medioBoleto();
+		$this->tarjeta3 = new paseLibre();
 		$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");
 		$this->colectivo2 = new Colectivo("142 Rojo", "Rosario Bus");
 		$this->bici = new Bicicleta(666);
