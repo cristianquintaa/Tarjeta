@@ -59,7 +59,7 @@ class Baja implements Tarjeta {
       $this->saldo = $this->saldo + 320;
     }
     else{
-      if ($monto = 500){
+      if ($monto == 500){
         $this->saldo = $this->saldo + 640;
       }
       else{
