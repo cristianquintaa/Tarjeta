@@ -7,6 +7,8 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
 	public function setup(){
 		$this->tarjeta = new Baja();
+		$this->tarjeta2 = new Medio_Boleto();
+		$this->tarjeta3 = new Pase_Libre();
 		$this->colectivo1 = new Colectivo("144 Negro", "Rosario Bus");
 		$this->colectivo2 = new Colectivo("142 Rojo", "Rosario Bus");
 		$this->bici = new Bicicleta(666);
@@ -41,6 +43,16 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta->recargar(100);
 		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
 		$this->assertEquals($this->tarjeta->saldo(), 88, "Si cargo 100 y pago una bici deberia tener 88");
+	}
+	public function testPagarSinSaldo(){
+		$this->tarjeta2->pagar($this->bici,"2016/09/10 12:00");
+		$this->assertEquals($this->tarjeta->saldo(), 0, "Si intento pagar una bici no deberia poder");
+		$this->tarjeta->pagar($this->colectivo,"2016/09/10 12:00");
+		$this->tarjeta->pagar($this->colectivo2,"2016/09/10 14:00");
+		$this->tarjeta->pagar($this->colectivo,"2016/09/10 20:00");
+		$this->assertEquals($this->tarjeta->viajePLus(), 2, "Si intento pagar 3 colectivos sin saldo solo tendria que poder pagar 2");
+		$this->tarjeta->recargar(100);
+		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y habia usado dos viajes plus deberia tener 84");
 	}
 }
 ?>
