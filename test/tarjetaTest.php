@@ -64,5 +64,10 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta3->pagar($this->colectivo2, "2016/10/09 04:19");
 		$this->assertEquals($this->tarjeta3->saldo(), 5, "Si pago un colectivo con pase libre no deberia cobrarme");
 	}
+	public function testViajesRealizados(){
+		$this->tarjeta->recargar(100);
+		$this->tarjeta->pagar($this->colectivo1, "2016/09/10 19:04");
+		$this->assertEquals($this->tarjeta->viajesRealizados(),"colectivo",8,"144 Negro", "Rosario Bus","2016/09/10 19:04", "Cuando llamo a viajesRealizados deberia mostrarme el ultimo viaje que realize");
+	}
 }
 ?>
