@@ -47,9 +47,9 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	public function testPagarSinSaldo(){
 		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
 		$this->assertEquals($this->tarjeta->saldo(), 0, "Si intento pagar una bici sin saldo no deberia poder");
-		$this->tarjeta->pagar($this->colectivo,"2016/09/10 12:00");
+		$this->tarjeta->pagar($this->colectivo1,"2016/09/10 12:00");
 		$this->tarjeta->pagar($this->colectivo2,"2016/09/10 14:00");
-		$this->tarjeta->pagar($this->colectivo,"2016/09/10 20:00");
+		$this->tarjeta->pagar($this->colectivo1,"2016/09/10 20:00");
 		$this->assertEquals($this->tarjeta->viajePLus(), 2, "Si intento pagar 3 colectivos sin saldo solo tendria que poder pagar 2");
 		$this->tarjeta->recargar(100);
 		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y habia usado dos viajes plus deberia tener 84");
