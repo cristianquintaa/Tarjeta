@@ -11,6 +11,7 @@ class Baja implements Tarjeta {
   protected $lunes, $dias = array(0 => "Lunes" , 1 => "Martes" , 2 => "Miercoles", 3 => "Jueves", 4 => "Viernes", 5 => "Sabado", 6 => "Domingo");
   public function __construct() {
     $this->descuento = 1;
+    $this->lunes = strtotime("2016/01/04 00:00");
   }
   public function pagar(Transporte $transporte, $fecha_y_hora){
     $aux1=strtotime($fecha_y_hora);
@@ -22,10 +23,15 @@ class Baja implements Tarjeta {
 
     if ($transporte->tipo() == "colectivo"){
       $trasbordo = false;
-      if(($dia==5 && $a>50400 && $a<79200) || ($dia==6 && $a>21600 && $a<79200) || $a<21600 || $a>79200 ){$this->tiempomaxtransbordo=5400;} else {$this->tiempomaxtransbordo=3600;}
+      if(($dia==5 && $a>50400 && $a<79200) || ($dia==6 && $a>21600 && $a<79200) || $a<21600 || $a>79200 ){
+      	$this->tiempomaxtransbordo=5400;
+      } 
+      else {
+      	$this->tiempomaxtransbordo=3600;
+      }
 
       if (count($this->viajes) > 0){
-        if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo) || $this->viajes[$this->ultimafecha]->getTransporte()->tipo() == $transporte->tipo(){
+        if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo) || $this->viajes[$this->ultimafecha]->getTransporte()->tipo() == $transporte->tipo()){
           $trasbordo = true;
         }
       }
