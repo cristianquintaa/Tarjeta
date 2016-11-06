@@ -7,17 +7,25 @@ class Baja implements Tarjeta {
   private $saldo = 0;
   protected $descuento;
   public $viajePlus=0;
-  public $ultimafecha;
+  protected $ultimafecha,$ultimabicipaga=0,$tiempomaxtransbordo=3600;
+  protected $lunes, $dias = array(0 => "Lunes" , 1 => "Martes" , 2 => "Miercoles", 3 => "Jueves", 4 => "Viernes", 5 => "Sabado", 6 => "Domingo");
   public function __construct() {
     $this->descuento = 1;
   }
   public function pagar(Transporte $transporte, $fecha_y_hora){
     $aux1=strtotime($fecha_y_hora);
     $aux2=strtotime($this->ultimafecha);
+    $dia = $aux1 - $this->lunes;
+	$a = $dia % 86400;
+	$dia = $dia - $a;
+	$dia = ($dia/86400) % 7;
+
     if ($transporte->tipo() == "colectivo"){
       $trasbordo = false;
+      if(($dia==5 && $a>50400 && $a<79200) || ($dia==6 && $a>21600 && $a<79200) || $a<21600 || $a>79200 ){$this->tiempomaxtransbordo=5400;} else {$this->tiempomaxtransbordo=3600;}
+
       if (count($this->viajes) > 0){
-        if (($aux1-$aux2) < 3600) {
+        if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo) || $this->viajes[$this->ultimafecha]->getTransporte()->tipo() == $transporte->tipo(){
           $trasbordo = true;
         }
       }
@@ -28,7 +36,7 @@ class Baja implements Tarjeta {
       else{
         $monto = 8*$this->descuento;
       }
-      $this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fecha_y_hora));
+      
       $this->saldo =  $this->saldo - $monto;
       $this->ultimafecha=$fecha_y_hora;
       if($this->saldo <0 ){
@@ -38,17 +46,31 @@ class Baja implements Tarjeta {
         else{
           $this->viajePlus++;
           $this->saldo= $this->saldo + $monto;
+          $this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fecha_y_hora));
         }
+      }
+      else{
+      	$this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fecha_y_hora));
       }
     } 
     else {
       if ($transporte->tipo() == "bici"){
-        $this->viajes[] = new Viaje($transporte->tipo(), 12, $transporte, strtotime($fecha_y_hora));
-        $this->saldo = $this->saldo-12;
-        if($this->saldo <0){
-          $this->saldo= $this->saldo +12;
-        }
-      }
+      	$aux1 = strtotime($fecha_y_hora);
+		$aux2 = strtotime($this->ultimabicipaga);
+		if($this->ultimabicipaga == 0 || ($aux1-$aux2>86400)){
+			$this->saldo = $this->saldo-12;
+        	if($this->saldo <0){
+         	 $this->saldo= $this->saldo +12;
+			$this->ultimabicipaga = $fecha_y_hora;
+			} 
+			else{
+				$this->viajes[] = new Viaje($transporte->tipo(), 12, $transporte, strtotime($fecha_y_hora));
+			}
+		}
+		else {
+			$this->viajes[] = new Viaje($transporte->tipo(), 12, $transporte, strtotime($fecha_y_hora));
+		}
+        
     }   
   }
   public function recargar($monto){

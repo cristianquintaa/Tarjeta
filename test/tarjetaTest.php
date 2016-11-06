@@ -39,10 +39,12 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta->pagar($this->colectivo2, "2016/09/10 20:30");
 		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y pago dos colectivos sin transbordo deberia tener 84");
 	}
-	public function testPagarBici(){
+	public function testPagarBiciDistintoDias(){
 		$this->tarjeta->recargar(100);
 		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
 		$this->assertEquals($this->tarjeta->saldo(), 88, "Si cargo 100 y pago una bici deberia tener 88");
+		$this->tarjeta->pagar($this->bici,"2016/09/11 12:00");
+		$this->assertEquals($this->tarjeta->saldo(), 76, "Si cargo 100 y pago dos bicis deberia tener 76");
 	}
 	public function testPagarSinSaldo(){
 		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
@@ -63,6 +65,13 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta3->recargar(5);
 		$this->tarjeta3->pagar($this->colectivo2, "2016/10/09 04:19");
 		$this->assertEquals($this->tarjeta3->saldo(), 5, "Si pago un colectivo con pase libre no deberia cobrarme");
+	}
+	public function testPagarBiciDosBicisMismoDia(){
+		$this->tarjeta->recargar(100);
+		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
+		$this->assertEquals($this->tarjeta->saldo(), 88, "Si cargo 100 y pago una bici deberia tener 88");
+		$this->tarjeta->pagar($this->bici,"2016/09/10 18:00");
+		$this->assertEquals($this->tarjeta->saldo(), 88, "Si cargo 100 y pago dos bicis en el mismo dia deberia tener 88");
 	}
 }
 ?>
