@@ -79,6 +79,7 @@ class Baja implements Tarjeta {
         
     }   
   }
+}
   public function recargar($monto){
     if ($monto == 272){
       $this->saldo = $this->saldo + 320;
