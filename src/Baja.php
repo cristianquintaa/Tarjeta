@@ -7,7 +7,7 @@ class Baja implements Tarjeta {
   private $saldo = 0;
   protected $descuento;
   public $viajePlus=0;
-  protected $ultimafecha,$ultimabicipaga=0,$tiempomaxtransbordo=3600;
+  protected $ultimafecha = 0,$ultimabicipaga=0,$tiempomaxtransbordo=3600;
   protected $lunes, $dias = array(0 => "Lunes" , 1 => "Martes" , 2 => "Miercoles", 3 => "Jueves", 4 => "Viernes", 5 => "Sabado", 6 => "Domingo");
   public function __construct() {
     $this->descuento = 1;
