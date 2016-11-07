@@ -36,14 +36,14 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	public function testSinTransbordo(){
 		$this->tarjeta->recargar(100);
 		$this->tarjeta->pagar($this->colectivo1, "2016/09/10 19:00");
-		$this->tarjeta->pagar($this->colectivo2, "2016/09/10 20:30");
+		$this->tarjeta->pagar($this->colectivo2, "2016/09/10 21:30");
 		$this->assertEquals($this->tarjeta->saldo(), 84, "Si cargo 100 y pago dos colectivos sin transbordo deberia tener 84");
 	}
 	public function testPagarBiciDistintoDias(){
 		$this->tarjeta->recargar(100);
 		$this->tarjeta->pagar($this->bici,"2016/09/10 12:00");
 		$this->assertEquals($this->tarjeta->saldo(), 88, "Si cargo 100 y pago una bici deberia tener 88");
-		$this->tarjeta->pagar($this->bici,"2016/09/11 12:00");
+		$this->tarjeta->pagar($this->bici,"2016/09/11 20:00");
 		$this->assertEquals($this->tarjeta->saldo(), 76, "Si cargo 100 y pago dos bicis deberia tener 76");
 	}
 	public function testPagarSinSaldo(){
