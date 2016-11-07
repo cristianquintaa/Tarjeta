@@ -28,7 +28,8 @@ class Baja implements Tarjeta {
       	$this->tiempomaxtransbordo=3600;
       }
 
-      if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo) || $this->viajes[$this->ultimafecha]->getTransporte()->tipo() == $transporte->tipo()){
+      if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo))
+        {
           $trasbordo = false;
         }
        else{
@@ -44,7 +45,6 @@ class Baja implements Tarjeta {
       }
       
       $this->saldo =  $this->saldo - $monto;
-      $this->ultimafecha=$fecha_y_hora;
       if($this->saldo <0 ){
         if($this->viajePlus==2){
           $this->saldo= $this->saldo + $monto;
@@ -53,10 +53,12 @@ class Baja implements Tarjeta {
           $this->viajePlus++;
           $this->saldo= $this->saldo + $monto;
           $this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fecha_y_hora));
+          $this->ultimafecha=$fecha_y_hora;
         }
       }
       else{
       	$this->viajes[] = new Viaje($transporte->tipo(), $monto, $transporte, strtotime($fecha_y_hora));
+      	$this->ultimafecha=$fecha_y_hora;
       }
     } 
     if ($transporte->tipo() == "bici"){
