@@ -13,4 +13,7 @@ class Viaje {
 		$this->monto = $monto;
 		$this->transporte = $transporte;
 	}
+	public function getTransporte(){
+		return $this->transporte;
+	}
 }
