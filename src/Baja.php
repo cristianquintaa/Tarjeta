@@ -28,7 +28,7 @@ class Baja implements Tarjeta {
       	$this->tiempomaxtransbordo=3600;
       }
 
-      if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo || ($this->viajes[$this->ultimafecha]->getTransporte())==$transporte)
+      if($this->ultimafecha == 0 || ($aux1-$aux2>$this->tiempomaxtransbordo) || ($this->viajes[$this->ultimafecha]->getTransporte())==$transporte)
         {
           $trasbordo = false;
         }
